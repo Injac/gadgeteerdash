@@ -1,0 +1,88 @@
+﻿<style>
+#neon h1 {
+	text-align: center;
+	margin: 200px auto;
+	font-family: "Museo";
+	font-size: 200px; text-transform: uppercase;
+	color: #fff;
+	text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff00de, 0 0 70px #ff00de, 0 0 80px #ff00de, 0 0 100px #ff00de, 0 0 150px #ff00de;
+}
+
+</style>
+<div class="row">
+    <div class="col-lg-12">
+        <div id="Gauge" style="width:400px; height:320px;" />
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-lg-12 text-center">
+       <h1 id="SystemText">Hello World</h1>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+
+        <img src="~/Content/spider.jpg" />
+    </div>
+
+</div>
+
+
+
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/json2.min.js"></script>
+<script src="~/Scripts/jquery.signalR-2.1.2.js"></script>
+<script src="~/signalr/hubs"></script>
+<script src="~/Scripts/raphael.2.1.0.min.js"></script>
+<script src="~/Scripts/justgage.1.0.1.min.js"></script>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+       
+                  var g1 = new JustGage({
+                id: "Gauge",
+                value: 0,
+                min: 0,
+                max: 100,
+                title: "Spider Ticks",
+                label: "tick data"
+            });
+
+
+         
+
+
+            var gadgeteer = $.connection.gadgeteerHub;
+
+            gadgeteer.client.hello = function (message) {
+
+
+                g1.refresh(message);
+               
+            };
+
+            gadgeteer.client.systeminfo = function (message) {
+
+
+              
+                $("#SystemText").html(message);
+            };
+
+
+            $.connection.hub.start().done(function () {
+                // Wire up Send button to call NewContosoChatMessage on the server.
+                console.log("started");
+            });
+
+        });
+
+
+</script>
