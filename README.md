@@ -16,3 +16,5 @@ The **Index.cshtml** view, that contains the "dashboard" can be found within the
 The SignalR-Hub that conatins the backend "logic" (LOL) can be found in the project-root of the **iotdash** project and is called **GadgeteerHub.cs** - it contains the two SignalR-Methods that are invoked from the Web-API.
 
 NETMF on the Spider simply calls the two Web-API get actions defined within the **/iotdash/Controller/ValuesController.cs** file. Both methods simply call the pre-defined client-side "hello" or "systemInfo" methods on the hub.
+
+However, it is important that you have a local IIS instance running to test locally, to be able to assign a hostname. Localhost will not work in this case.
